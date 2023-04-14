@@ -17,7 +17,6 @@ function App() {
         console.log(error);
       }
     }
-
     FetchDetailsData();
   }, []);
   const itemsPerPage = 10;
@@ -44,31 +43,30 @@ function App() {
         ))}
       </div>
       <ul className="pagination">
+        <button
+          className="page-link"
+          disabled={currentPage === 1}
+          onClick={() => setCurrentPage(currentPage - 1)}
+        >
+          Previous
+        </button>
+        {Array.from({ length: totalPages }).map((_, index) => (
           <button
-            className="page-link"
-            disabled={currentPage === 1}
-            onClick={() => setCurrentPage(currentPage - 1)}
+            key={index}
+            className={`page-link ${currentPage === index + 1 ? "active" : ""}`}
+            onClick={() => setCurrentPage(index + 1)}
           >
-            Previous
+            {index + 1}
           </button>
-          {Array.from({ length: totalPages }).map((_, index) => (
-          <li className="page-item" key={index}>
-            <button
-              className={`page-link ${currentPage === index +1 ? "active" : ""}`}
-              onClick={() => setCurrentPage(index + 1)}
-            >
-              {index + 1}
-            </button>
-          </li>
         ))}
-    
-          <button
-            className="page-link"
-            disabled={currentPage === totalPages}
-            onClick={() => setCurrentPage(currentPage + 1)}
-          >
-            Next
-          </button>
+
+        <button
+          className="page-link"
+          disabled={currentPage === totalPages}
+          onClick={() => setCurrentPage(currentPage + 1)}
+        >
+          Next
+        </button>
       </ul>
     </div>
   );
