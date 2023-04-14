@@ -29,7 +29,7 @@ function App() {
     <div className="container mt-3">
       <div id="MainDiv">
         {currentList.map((detail) => (
-          <div key={detail.id}>
+          <div>
             <p>
               <strong>Id:</strong> {detail.id}
             </p>
@@ -52,7 +52,6 @@ function App() {
         </button>
         {Array.from({ length: totalPages }).map((_, index) => (
           <button
-            key={index}
             className={`page-link ${currentPage === index + 1 ? "active" : ""}`}
             onClick={() => setCurrentPage(index + 1)}
           >
