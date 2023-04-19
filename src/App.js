@@ -26,25 +26,32 @@ function App() {
   const currentList = detailList.slice(startIndex, endIndex);
 
   return (
-    <div className="container mt-3">
+    <div className="container mt-3 table-responsive">
       <div id="MainDiv">
-        {currentList.map((detail) => (
-          <div>
-            <p>
-              <strong>Id:</strong> {detail.id}
-            </p>
-            <p>
-              <strong>Name:</strong> {detail.name}
-            </p>
-            <p>
-              <strong>Email:</strong> {detail.email}
-            </p>
-          </div>
-        ))}
+        <table id="table" className="table table-bordered">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            {currentList.map((detail) => (
+              <tr>
+                <td>{detail.id}</td>
+                <td>{detail.name}</td>
+                <td>{detail.email}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
+  <div id="buttons" className="d-flex justify-content-center">
       <ul className="pagination">
         <button
-          className="page-link"
+          id="previous"
+          className="d-flex justify-content-center page-link"
           disabled={currentPage === 1}
           onClick={() => setCurrentPage(currentPage - 1)}
         >
@@ -52,7 +59,10 @@ function App() {
         </button>
         {Array.from({ length: totalPages }).map((_, index) => (
           <button
-            className={`page-link ${currentPage === index + 1 ? "active" : ""}`}
+            id={`${index === 0 ? "first" : "last"}`}
+            className={`d-flex justify-content-center page-link ${
+              currentPage === index + 1 ? "active" : ""
+            }`}
             onClick={() => setCurrentPage(index + 1)}
           >
             {index + 1}
@@ -60,13 +70,15 @@ function App() {
         ))}
 
         <button
-          className="page-link"
+          id="next"
+          className="d-flex justify-content-center page-link"
           disabled={currentPage === totalPages}
           onClick={() => setCurrentPage(currentPage + 1)}
         >
           Next
         </button>
       </ul>
+      </div>
     </div>
   );
 }
